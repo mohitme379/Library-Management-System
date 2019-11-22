@@ -167,6 +167,9 @@ public class AddBook extends JPanel {
 					}
 					
 					reset();
+					LibrarianPage lp = new LibrarianPage();
+					lp.dispose();
+					lp.setVisible(true);
 			
 				}
 			}

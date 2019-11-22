@@ -25,6 +25,7 @@ public class LibrarianPage extends JFrame {
 	AddPublication addPublication = new AddPublication();
 	AddCategory addCategory = new AddCategory();
 	AddSubject addSubject = new AddSubject();
+	AllBooks allBooks = new AllBooks();
 	Welcome welcome = new Welcome();
 
 	/**
@@ -69,6 +70,18 @@ public class LibrarianPage extends JFrame {
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmAllBooks = new JMenuItem("All Books");
+		mntmAllBooks.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addStudent.setVisible(false);
+				addBook.setVisible(false);
+				addAuthor.setVisible(false);
+				addPublication.setVisible(false);
+				addCategory.setVisible(false);
+				addSubject.setVisible(false);
+				welcome.setVisible(false);
+				allBooks.setVisible(true);
+			}
+		});
 		mnFile.add(mntmAllBooks);
 		
 		JMenuItem mntmIssuedBooks = new JMenuItem("Issued Books");
@@ -96,6 +109,7 @@ public class LibrarianPage extends JFrame {
 				addCategory.setVisible(false);
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
+				allBooks.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmStudent);
@@ -110,6 +124,7 @@ public class LibrarianPage extends JFrame {
 				addCategory.setVisible(false);
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
+				allBooks.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmBook);
@@ -124,6 +139,7 @@ public class LibrarianPage extends JFrame {
 				addCategory.setVisible(false);
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
+				allBooks.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmAuthor);
@@ -138,6 +154,7 @@ public class LibrarianPage extends JFrame {
 				addCategory.setVisible(false);
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
+				allBooks.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmPublication);
@@ -152,6 +169,7 @@ public class LibrarianPage extends JFrame {
 				addCategory.setVisible(true);
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
+				allBooks.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmCategory);
@@ -166,6 +184,7 @@ public class LibrarianPage extends JFrame {
 				addCategory.setVisible(false);
 				addSubject.setVisible(true);
 				welcome.setVisible(false);
+				allBooks.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmSubject);
@@ -234,6 +253,9 @@ public class LibrarianPage extends JFrame {
 		contentPane.add(addSubject);
 		addSubject.setVisible(false);
 		
+		allBooks.setBounds(0,18,471,443);
+		contentPane.add(allBooks);
+		allBooks.setVisible(false);
 		
 	}
 }

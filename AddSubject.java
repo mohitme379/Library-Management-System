@@ -88,6 +88,9 @@ public class AddSubject extends JPanel {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
+				LibrarianPage lp = new LibrarianPage();
+				lp.dispose();
+				lp.setVisible(true);
 			}
 		});
 		button.setOpaque(false);

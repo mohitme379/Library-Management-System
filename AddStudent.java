@@ -16,7 +16,6 @@ import javax.swing.JPasswordField;
 
 public class AddStudent extends JPanel {
 	Connection con = DBInfo.getConn();
-	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JPasswordField passwordField;
@@ -37,12 +36,6 @@ public class AddStudent extends JPanel {
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFocusable(false);
 		
-		JLabel lblId = new JLabel("Id");
-		lblId.setFocusable(false);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		
@@ -56,7 +49,7 @@ public class AddStudent extends JPanel {
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField.setText(null);
+				
 				textField_1.setText(null);
 				textField_2.setText(null);
 				passwordField.setText(null);
@@ -68,12 +61,14 @@ public class AddStudent extends JPanel {
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String query = "insert into student values(?,?,?,?)";
+				String query = "insert into student values(?,?,?)";
 				String query2 = "select * from student";
+				String query3 = "insert into login(fullname, username, usertype, password) values(?,?,?,?)";
 				String Name = "";
-				String id = "";
-				String a = textField.getText();
-				String b = textField_1.getText();
+				String userName = "";
+				String userType = "student";
+				String a = textField_1.getText();
+				String b = textField_2.getText();
 				char[] p1 = passwordField.getPassword();
 				char[] p2 = passwordField_1.getPassword();
 				String pass1 = new String(p1);
@@ -86,14 +81,14 @@ public class AddStudent extends JPanel {
 					ResultSet res = ps2.executeQuery();
 					while(res.next())
 					{
-						id = res.getString(1);
 						Name = res.getString(2);
+						userName = res.getString(3);
 					}
 						
-						if(id.equalsIgnoreCase(a) || Name.equalsIgnoreCase(b))
+						if(userName.equalsIgnoreCase(a) || Name.equalsIgnoreCase(b))
 						{
 							JOptionPane.showMessageDialog(getParent(), "Student Already Exits","Error !",JOptionPane.ERROR_MESSAGE);
-							textField.setText(null);
+							
 							textField_1.setText(null);
 							textField_2.setText(null);
 							passwordField.setText(null);
@@ -108,11 +103,17 @@ public class AddStudent extends JPanel {
 								{
 									
 									PreparedStatement ps = con.prepareStatement(query);
-									ps.setString(1, textField.getText().toUpperCase());
-									ps.setString(2, textField_1.getText().toUpperCase());
-									ps.setString(3, textField_2.getText().toUpperCase());
-									ps.setString(4, passwordField.getText());
+									PreparedStatement ps3 = con.prepareStatement(query3);
+									
+									ps.setString(1, textField_1.getText().toUpperCase());
+									ps.setString(2, textField_2.getText().toUpperCase());
+									ps.setString(3, passwordField.getText());
 									ps.executeUpdate();
+									ps3.setString(1, textField_1.getText().toUpperCase());
+									ps3.setString(2, textField_2.getText().toUpperCase());
+									ps3.setString(3, userType);
+									ps3.setString(4, passwordField.getText());
+									ps3.executeUpdate();
 									
 								} 
 								catch (SQLException e1) 
@@ -121,7 +122,7 @@ public class AddStudent extends JPanel {
 									e1.printStackTrace();
 								}
 								
-									textField.setText(null);
+									
 									textField_1.setText(null);
 									textField_2.setText(null);
 									passwordField.setText(null);
@@ -134,9 +135,7 @@ public class AddStudent extends JPanel {
 								passwordField_1.setText(null);
 								}
 							
-							System.exit(0);
-							
-						}
+						}	
 					
 				} catch (SQLException e2) {
 					// TODO Auto-generated catch block
@@ -162,7 +161,6 @@ public class AddStudent extends JPanel {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblId, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblUserame, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
@@ -171,9 +169,6 @@ public class AddStudent extends JPanel {
 										.addComponent(lblAddNewStudent, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
 										.addComponent(textField_2)
 										.addComponent(textField_1)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(textField, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-											.addPreferredGap(ComponentPlacement.RELATED))
 										.addComponent(passwordField)
 										.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(groupLayout.createSequentialGroup()
@@ -187,10 +182,7 @@ public class AddStudent extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblAddNewStudent)
-					.addGap(29)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblId)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(48)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(50)

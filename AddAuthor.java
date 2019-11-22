@@ -87,7 +87,11 @@ public class AddAuthor extends JPanel {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-				System.exit(0);
+				
+				LibrarianPage lp = new LibrarianPage();
+				lp.dispose();
+				lp.setVisible(true);
+				
 					
 				
 			}
