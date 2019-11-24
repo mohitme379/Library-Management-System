@@ -86,6 +86,12 @@ public class LibrarianPage extends JFrame {
 				editStudentButtons.setVisible(false);
 			}
 		});
+		
+		JMenuItem mntmIssueBook = new JMenuItem("Issue Book");
+		mnFile.add(mntmIssueBook);
+		
+		JMenuItem mntmSubmitBook = new JMenuItem("Submit Book");
+		mnFile.add(mntmSubmitBook);
 		mnFile.add(mntmAllBooks);
 		
 		JMenuItem mntmIssuedBooks = new JMenuItem("Issued Books");

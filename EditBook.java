@@ -1,6 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
@@ -17,6 +21,7 @@ import java.awt.event.ActionEvent;
 public class EditBook extends JFrame {
 
 	Connection con = DBInfo.getConn();
+	EditBook_1 editBook_1 = new EditBook_1();
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -36,9 +41,10 @@ public class EditBook extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	public String BookId() {
+		String ID = textField.getText();
+		return ID;
+		}
 	public EditBook() {
 		setTitle("Edit Book");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,9 +60,37 @@ public class EditBook extends JFrame {
 		textField = new JTextField();
 		textField.setColumns(10);
 		
+		String title = "";
+		
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
+				int flag = 0;
+				String BookID = textField.getText();
+				String query = "select * from books where id = "+BookID;
+				
+				try {
+					PreparedStatement ps = con.prepareStatement(query);
+					ResultSet res = ps.executeQuery();
+					
+					while(res.next()) {
+						flag = 1;
+					}
+					
+					if(flag==1) {
+					
+						editBook_1.setVisible(true);
+						dispose();
+					}
+					else
+							JOptionPane.showMessageDialog(getParent(), "BookID not found!");
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			
 			}
 		});
