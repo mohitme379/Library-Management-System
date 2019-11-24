@@ -76,7 +76,6 @@ public class AddCategory extends JPanel {
 							
 							textField.setText(null);
 							textField_1.setText(null);
-							System.exit(0);
 							
 						}
 					
@@ -87,6 +86,16 @@ public class AddCategory extends JPanel {
 				LibrarianPage lp = new LibrarianPage();
 				lp.dispose();
 				lp.setVisible(true);
+				lp.addStudent.setVisible(false);
+				lp.addBook.setVisible(false);
+				lp.addAuthor.setVisible(false);
+				lp.addPublication.setVisible(false);
+				lp.addCategory.setVisible(true);
+				lp.addSubject.setVisible(false);
+				lp.welcome.setVisible(false);
+				lp.allBooks.setVisible(false);
+				lp.editStudent.setVisible(false);
+				lp.editStudentButtons.setVisible(false);
 			}
 		});
 		button.setOpaque(false);

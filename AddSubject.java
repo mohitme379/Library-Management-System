@@ -45,6 +45,13 @@ public class AddSubject extends JPanel {
 				String a = textField.getText();
 				String b = textField_1.getText();
 				
+				if(a=="" || b=="")
+				{
+					JOptionPane.showMessageDialog(getParent(), "Empty fields not allowed !","Error",JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+				
 				PreparedStatement ps2;
 				
 				try {
@@ -80,7 +87,6 @@ public class AddSubject extends JPanel {
 							
 							textField.setText(null);
 							textField_1.setText(null);
-							System.exit(0);
 							
 						}
 					
@@ -88,9 +94,21 @@ public class AddSubject extends JPanel {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
+				
 				LibrarianPage lp = new LibrarianPage();
 				lp.dispose();
 				lp.setVisible(true);
+				lp.addStudent.setVisible(false);
+				lp.addBook.setVisible(false);
+				lp.addAuthor.setVisible(false);
+				lp.addPublication.setVisible(false);
+				lp.addCategory.setVisible(false);
+				lp.addSubject.setVisible(true);
+				lp.welcome.setVisible(false);
+				lp.allBooks.setVisible(false);
+				lp.editStudent.setVisible(false);
+				lp.editStudentButtons.setVisible(false);
+			}
 			}
 		});
 		button.setOpaque(false);

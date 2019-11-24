@@ -170,6 +170,16 @@ public class AddBook extends JPanel {
 					LibrarianPage lp = new LibrarianPage();
 					lp.dispose();
 					lp.setVisible(true);
+					lp.addStudent.setVisible(false);
+					lp.addBook.setVisible(true);
+					lp.addAuthor.setVisible(false);
+					lp.addPublication.setVisible(false);
+					lp.addCategory.setVisible(false);
+					lp.addSubject.setVisible(false);
+					lp.welcome.setVisible(false);
+					lp.allBooks.setVisible(false);
+					lp.editStudent.setVisible(false);
+					lp.editStudentButtons.setVisible(false);
 			
 				}
 			}

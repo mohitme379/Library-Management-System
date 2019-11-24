@@ -27,6 +27,8 @@ public class LibrarianPage extends JFrame {
 	AddSubject addSubject = new AddSubject();
 	AllBooks allBooks = new AllBooks();
 	Welcome welcome = new Welcome();
+	EditStudent editStudent = new EditStudent();
+	EditStudentButtons editStudentButtons = new EditStudentButtons();
 
 	/**
 	 * Launch the application.
@@ -80,6 +82,8 @@ public class LibrarianPage extends JFrame {
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
 				allBooks.setVisible(true);
+				editStudent.setVisible(false);
+				editStudentButtons.setVisible(false);
 			}
 		});
 		mnFile.add(mntmAllBooks);
@@ -110,6 +114,8 @@ public class LibrarianPage extends JFrame {
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
 				allBooks.setVisible(false);
+				editStudent.setVisible(false);
+				editStudentButtons.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmStudent);
@@ -125,6 +131,8 @@ public class LibrarianPage extends JFrame {
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
 				allBooks.setVisible(false);
+				editStudent.setVisible(false);
+				editStudentButtons.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmBook);
@@ -140,6 +148,8 @@ public class LibrarianPage extends JFrame {
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
 				allBooks.setVisible(false);
+				editStudent.setVisible(false);
+				editStudentButtons.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmAuthor);
@@ -155,6 +165,8 @@ public class LibrarianPage extends JFrame {
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
 				allBooks.setVisible(false);
+				editStudent.setVisible(false);
+				editStudentButtons.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmPublication);
@@ -170,6 +182,8 @@ public class LibrarianPage extends JFrame {
 				addSubject.setVisible(false);
 				welcome.setVisible(false);
 				allBooks.setVisible(false);
+				editStudent.setVisible(false);
+				editStudentButtons.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmCategory);
@@ -185,6 +199,8 @@ public class LibrarianPage extends JFrame {
 				addSubject.setVisible(true);
 				welcome.setVisible(false);
 				allBooks.setVisible(false);
+				editStudent.setVisible(false);
+				editStudentButtons.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmSubject);
@@ -194,21 +210,65 @@ public class LibrarianPage extends JFrame {
 		menuBar.add(mnEdit);
 		
 		JMenuItem menuItem = new JMenuItem("Student");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				addStudent.setVisible(false);
+				addBook.setVisible(false);
+				addAuthor.setVisible(false);
+				addPublication.setVisible(false);
+				addCategory.setVisible(false);
+				addSubject.setVisible(false);
+				welcome.setVisible(false);
+				allBooks.setVisible(false);
+				editStudent.setVisible(true);
+				editStudentButtons.setVisible(true);
+			}
+		});
 		mnEdit.add(menuItem);
 		
 		JMenuItem menuItem_1 = new JMenuItem("Book");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			EditBook editBook = new EditBook();
+			editBook.setVisible(true);
+			}
+		});
 		mnEdit.add(menuItem_1);
 		
 		JMenuItem menuItem_2 = new JMenuItem("Author");
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditAuthor editAuthor = new EditAuthor();
+				editAuthor.setVisible(true);
+			}
+		});
 		mnEdit.add(menuItem_2);
 		
 		JMenuItem menuItem_3 = new JMenuItem("Publication");
+		menuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditPublication editPublication = new EditPublication();
+				editPublication.setVisible(true);
+			}
+		});
 		mnEdit.add(menuItem_3);
 		
 		JMenuItem menuItem_4 = new JMenuItem("Category");
+		menuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			EditCategory editCategory = new EditCategory();
+			editCategory.setVisible(true);
+			}
+		});
 		mnEdit.add(menuItem_4);
 		
 		JMenuItem menuItem_5 = new JMenuItem("Subject");
+		menuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditSubject editSubject = new EditSubject();
+				editSubject.setVisible(true);
+			}
+		});
 		mnEdit.add(menuItem_5);
 		
 		JLayeredPane layeredPane = new JLayeredPane();
@@ -257,5 +317,12 @@ public class LibrarianPage extends JFrame {
 		contentPane.add(allBooks);
 		allBooks.setVisible(false);
 		
+		editStudent.setBounds(0,18,471,370);
+		contentPane.add(editStudent);
+		editStudent.setVisible(false);
+		
+		editStudentButtons.setBounds(0,400,471,60);
+		contentPane.add(editStudentButtons);
+		editStudentButtons.setVisible(false);
 	}
 }

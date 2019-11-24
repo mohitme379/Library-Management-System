@@ -45,55 +45,71 @@ public class AddAuthor extends JPanel {
 				String b = textField_1.getText();
 				
 				PreparedStatement ps2;
-				
-				try {
-					ps2 = con.prepareStatement(query2);
-					ResultSet res = ps2.executeQuery();
-					while(res.next())
-					{
-						id = res.getString(1);
-						authName = res.getString(2);
-					}
-						
-						if(id.equalsIgnoreCase(a) || authName.equalsIgnoreCase(b))
+				if(a=="" || b=="")
+				{
+					JOptionPane.showMessageDialog(getParent(), "Empty fields not allowed !","Error",JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+					try {
+						ps2 = con.prepareStatement(query2);
+						ResultSet res = ps2.executeQuery();
+						while(res.next())
 						{
-							JOptionPane.showMessageDialog(getParent(), "Author Already Exits","Error !",JOptionPane.ERROR_MESSAGE);
-							textField.setText(null);
-							textField_1.setText(null);
+							id = res.getString(1);
+							authName = res.getString(2);
 						}
-						
-						else
-						{
-						
-							try {
-								
-								PreparedStatement ps = con.prepareStatement(query);
-								ps.setString(1, textField.getText().toUpperCase());
-								ps.setString(2, textField_1.getText().toUpperCase());
-								ps.executeUpdate();
-								
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+							
+							if(id.equalsIgnoreCase(a) || authName.equalsIgnoreCase(b))
+							{
+								JOptionPane.showMessageDialog(getParent(), "Author Already Exits","Error !",JOptionPane.ERROR_MESSAGE);
+								textField.setText(null);
+								textField_1.setText(null);
 							}
 							
-							textField.setText(null);
-							textField_1.setText(null);
+							else
+							{
 							
-							
-						}
-					
-				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
+								try {
+									
+									PreparedStatement ps = con.prepareStatement(query);
+									ps.setString(1, textField.getText().toUpperCase());
+									ps.setString(2, textField_1.getText().toUpperCase());
+									ps.executeUpdate();
+									
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+								textField.setText(null);
+								textField_1.setText(null);
+								
+								
+							}
+						
+					}
+					catch (SQLException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 				
-				LibrarianPage lp = new LibrarianPage();
-				lp.dispose();
-				lp.setVisible(true);
+					LibrarianPage lp = new LibrarianPage();
+					lp.dispose();
+					lp.setVisible(true);
+					lp.addStudent.setVisible(false);
+					lp.addStudent.setVisible(false);
+					lp.addBook.setVisible(false);
+					lp.addAuthor.setVisible(true);
+					lp.addPublication.setVisible(false);
+					lp.addCategory.setVisible(false);
+					lp.addSubject.setVisible(false);
+					lp.welcome.setVisible(false);
+					lp.allBooks.setVisible(false);
+					lp.editStudent.setVisible(false);
+					lp.editStudentButtons.setVisible(false);
 				
-					
-				
+			}
 			}
 		});
 		btnSave.setFocusable(false);

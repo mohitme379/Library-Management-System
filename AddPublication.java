@@ -77,7 +77,6 @@ public class AddPublication extends JPanel {
 							
 							textField.setText(null);
 							textField_1.setText(null);
-							System.exit(0);
 							
 						}
 					
@@ -88,6 +87,16 @@ public class AddPublication extends JPanel {
 				LibrarianPage lp = new LibrarianPage();
 				lp.dispose();
 				lp.setVisible(true);
+				lp.addStudent.setVisible(false);
+				lp.addBook.setVisible(false);
+				lp.addAuthor.setVisible(false);
+				lp.addPublication.setVisible(true);
+				lp.addCategory.setVisible(false);
+				lp.addSubject.setVisible(false);
+				lp.welcome.setVisible(false);
+				lp.allBooks.setVisible(false);
+				lp.editStudent.setVisible(false);
+				lp.editStudentButtons.setVisible(false);
 			}
 		});
 		button.setFocusable(false);

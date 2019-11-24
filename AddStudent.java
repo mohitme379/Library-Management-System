@@ -106,11 +106,11 @@ public class AddStudent extends JPanel {
 									PreparedStatement ps3 = con.prepareStatement(query3);
 									
 									ps.setString(1, textField_1.getText().toUpperCase());
-									ps.setString(2, textField_2.getText().toUpperCase());
+									ps.setString(2, textField_2.getText());
 									ps.setString(3, passwordField.getText());
 									ps.executeUpdate();
 									ps3.setString(1, textField_1.getText().toUpperCase());
-									ps3.setString(2, textField_2.getText().toUpperCase());
+									ps3.setString(2, textField_2.getText());
 									ps3.setString(3, userType);
 									ps3.setString(4, passwordField.getText());
 									ps3.executeUpdate();
@@ -134,6 +134,20 @@ public class AddStudent extends JPanel {
 								passwordField.setText(null);
 								passwordField_1.setText(null);
 								}
+							LibrarianPage lp = new LibrarianPage();
+							lp.dispose();
+							lp.setVisible(true);
+							lp.addStudent.setVisible(true);
+							lp.addBook.setVisible(false);
+							lp.addAuthor.setVisible(false);
+							lp.addPublication.setVisible(false);
+							lp.addCategory.setVisible(false);
+							lp.addSubject.setVisible(false);
+							lp.welcome.setVisible(false);
+							lp.allBooks.setVisible(false);
+							lp.editStudent.setVisible(false);
+							lp.editStudentButtons.setVisible(false);
+					
 							
 						}	
 					
