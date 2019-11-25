@@ -20,7 +20,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class EditBook_1 extends JFrame {
 	
-	EditBook editBook = new EditBook();
+	String BookID;
 	Connection con = DBInfo1.getConn();
 	private JPanel contentPane;
 	private JTextField textField_3;
@@ -84,20 +84,20 @@ public class EditBook_1 extends JFrame {
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox(DBInfo1.getValues("author"));
-		comboBox.setFocusable(false);
+		JComboBox comboBox_3 = new JComboBox(DBInfo1.getValues("author"));
+		comboBox_3.setFocusable(false);
 		
-		JComboBox comboBox_1 = new JComboBox(DBInfo1.getValues("publication"));
-		comboBox_1.setFocusable(false);
+		JComboBox comboBox_2 = new JComboBox(DBInfo1.getValues("publication"));
+		comboBox_2.setFocusable(false);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		
-		JComboBox comboBox_2 = new JComboBox(DBInfo1.getValues("category"));
-		comboBox_2.setFocusable(false);
+		JComboBox comboBox_1 = new JComboBox(DBInfo1.getValues("category"));
+		comboBox_1.setFocusable(false);
 		
-		JComboBox comboBox_3 = new JComboBox(DBInfo1.getValues("subject"));
-		comboBox_3.setFocusable(false);
+		JComboBox comboBox = new JComboBox(DBInfo1.getValues("subject"));
+		comboBox.setFocusable(false);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
@@ -118,8 +118,7 @@ public class EditBook_1 extends JFrame {
 		textField_1.setEditable(false);
 		textField_1.setColumns(10);
 		
-		String BookID = editBook.BookId();
-		System.out.println(BookID);
+		
 		String query = "select * from books where Id = "+BookID;
 		
 		String title = "";
@@ -151,6 +150,11 @@ public class EditBook_1 extends JFrame {
 			textField_3.setText(isbn);
 			textField_4.setText(price);
 			textField_5.setText(qnt);
+			comboBox_3.setSelectedItem(author);
+			comboBox_2.setSelectedItem(publication);
+			comboBox_1.setSelectedItem(category);
+			comboBox.setSelectedItem(subject);
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

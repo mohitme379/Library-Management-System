@@ -41,10 +41,7 @@ public class EditBook extends JFrame {
 		});
 	}
 
-	public String BookId() {
-		String ID = textField.getText();
-		return ID;
-		}
+	
 	public EditBook() {
 		setTitle("Edit Book");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -80,6 +77,7 @@ public class EditBook extends JFrame {
 					
 					if(flag==1) {
 					
+						editBook_1.BookID = BookID;
 						editBook_1.setVisible(true);
 						dispose();
 					}
