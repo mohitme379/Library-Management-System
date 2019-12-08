@@ -105,11 +105,11 @@ public class AddStudent extends JPanel {
 									PreparedStatement ps = con.prepareStatement(query);
 									PreparedStatement ps3 = con.prepareStatement(query3);
 									
-									ps.setString(1, textField_1.getText().toUpperCase());
+									ps.setString(1, textField_1.getText());
 									ps.setString(2, textField_2.getText());
 									ps.setString(3, passwordField.getText());
 									ps.executeUpdate();
-									ps3.setString(1, textField_1.getText().toUpperCase());
+									ps3.setString(1, textField_1.getText());
 									ps3.setString(2, textField_2.getText());
 									ps3.setString(3, userType);
 									ps3.setString(4, passwordField.getText());

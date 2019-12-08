@@ -81,8 +81,9 @@ public class EditStudentPassword extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				int flag = 0;
 				String query = "Update student set password = ? where username = ?";
-				String query1 = "select username, password from student";
+				String query1 = "select * from student where username = ? AND password = ?";
 				String query2 = "Update login set password = ? where username = ? AND usertype = ?";
 				String getUsername = textField.getText();
 				String getPassword_1 = passwordField_1.getText();
@@ -97,6 +98,9 @@ public class EditStudentPassword extends JFrame {
 				try {
 					PreparedStatement ps = con.prepareStatement(query);
 					PreparedStatement ps1 = con.prepareStatement(query1);
+					ps1.setString(1, getUsername);
+					ps1.setString(2, getPassword);
+					
 					ps.setString(1, getPassword_1);
 					ps.setString(2, getUsername);
 					PreparedStatement ps2 = con.prepareStatement(query2);
@@ -105,12 +109,11 @@ public class EditStudentPassword extends JFrame {
 					ps2.setString(3, "student");
 					ResultSet res = ps1.executeQuery();
 					while(res.next()) {
-						dbUsername = res.getString(1);
-						dbPassword = res.getString(2);
+						flag = 1;
 					}
 					
 					
-					if(getUsername.equalsIgnoreCase(dbUsername) && getPassword.equals(dbPassword))
+					if(flag == 1)
 					{
 						ps.executeUpdate();
 						ps2.executeUpdate();

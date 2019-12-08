@@ -76,14 +76,13 @@ public class EditStudentUserName extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
+				int flag = 0;
 				String query = "update student set Username = ? where Password = ?";
-				String query2 = "select Username, Password from student";
+				String query2 = "select * from student where username = ? AND password = ?";
 				String query3 = "update login set Username = ? where Password = ? AND usertype = ?";
 				String newUserName = textField_1.getText();
 				String password = passwordField.getText();
 				String oldUserName = textField.getText();
-				String dbUserName = "";
-				String dbPassword = "";
 				
 				if(oldUserName.equals("")||newUserName.equals(""))
 					JOptionPane.showMessageDialog(getParent(), "Empty fields not allowed");
@@ -92,11 +91,12 @@ public class EditStudentUserName extends JFrame {
 				try 
 				{
 					PreparedStatement ps2 = con.prepareStatement(query2);
+					ps2.setString(1, oldUserName);
+					ps2.setString(2, password);
 					ResultSet res = ps2.executeQuery();
 					while(res.next())
 					{
-						dbUserName = res.getString(1);
-						dbPassword = res.getString(2);
+						flag = 1;
 					
 					}
 				}
@@ -105,33 +105,30 @@ public class EditStudentUserName extends JFrame {
 					System.out.println(ae);
 				}
 			
-				if(oldUserName.equalsIgnoreCase(dbUserName))
+				if(flag == 1)
 				{
-					if(dbPassword.equals(password))
-					{
+					
 						try {
 							PreparedStatement ps = con.prepareStatement(query);
 							ps.setString(1, newUserName);
 							ps.setString(2, password);
 							ps.executeUpdate();
-							PreparedStatement ps2 = con.prepareStatement(query2);
-							ps2.setString(1, newUserName);
-							ps2.setString(2, password);
-							ps2.setString(3, "student");
+							PreparedStatement ps3 = con.prepareStatement(query3);
+							ps3.setString(1, newUserName);
+							ps3.setString(2, password);
+							ps3.setString(3, "student");
+							ps3.executeUpdate();
 						} catch (SQLException e1) {
 							
 							e1.printStackTrace();
-						}
+						
 					}
-					else
-					{
-						JOptionPane.showMessageDialog(getParent(), "password doesn't match !", "Error", JOptionPane.ERROR_MESSAGE);
-					}
+					
 				}
 				
 				else
 				{
-					JOptionPane.showMessageDialog(getParent(), "username not found !", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(getParent(), "Incorrect username or password", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				
 				textField_1.setText(null);
