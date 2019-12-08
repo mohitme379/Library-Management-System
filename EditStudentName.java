@@ -75,6 +75,7 @@ public class EditStudentName extends JFrame {
 
 				String query = "update student set name = ? where password = ?";
 				String query2 = "select name, password from student";
+				String query3 = "update login set name = ? where name = ? AND usertype = ?";
 				String newName = textField_1.getText();
 				String password = passwordField.getText();
 				String oldName = textField.getText();
@@ -104,6 +105,10 @@ public class EditStudentName extends JFrame {
 								ps.setString(1, newName);
 								ps.setString(2, password);
 								ps.executeUpdate();
+								PreparedStatement ps3 = con.prepareStatement(query3);
+								ps3.setString(1, newName);
+								ps3.setString(2, oldName);
+								ps3.setString(3, "student");
 							} catch (SQLException e1) {
 								
 								e1.printStackTrace();

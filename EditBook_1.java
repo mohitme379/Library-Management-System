@@ -13,14 +13,17 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JComboBox;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EditBook_1 extends JFrame {
-	
-	String BookID;
+
 	Connection con = DBInfo1.getConn();
 	private JPanel contentPane;
 	private JTextField textField_3;
@@ -28,15 +31,15 @@ public class EditBook_1 extends JFrame {
 	private JTextField textField_5;
 	private JTextField textField_2;
 	private JTextField textField_1;
+	private String bookID;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditBook_1 frame = new EditBook_1();
+					EditBook_1 frame = new EditBook_1("");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,10 +48,10 @@ public class EditBook_1 extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public EditBook_1() {
+	public EditBook_1(String str) {
+		
+		bookID = str;
+		
 		setTitle("Edit Book");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 458, 480);
@@ -106,10 +109,72 @@ public class EditBook_1 extends JFrame {
 		textField_2.setColumns(10);
 		
 		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String query = "update books set Title = ?, Author = ?, Publication = ?, Category = ?, Subject = ?, ISBN = ?, Price = ?, Quantity = ? where Id = ?";
+				
+				if(textField_1.getText().equals("") || textField_2.getText().equals(""))
+				{
+					if(textField_3.getText().equals("") || textField_4.getText().equals("")) {
+						if(textField_5.getText().equals("")) {
+							JOptionPane.showMessageDialog(getParent(), "Empty Fields Not Allowed");
+						}
+						JOptionPane.showMessageDialog(getParent(), "Empty Fields Not Allowed");
+					}
+					JOptionPane.showMessageDialog(getParent(), "Empty Fields Not Allowed");
+				}
+				else {
+				try {
+					PreparedStatement ps = con.prepareStatement(query);
+					ps.setString(1, textField_2.getText());
+					ps.setString(2, (String) comboBox_3.getSelectedItem());
+					ps.setString(3, (String) comboBox_2.getSelectedItem());
+					ps.setString(4, (String) comboBox_1.getSelectedItem());
+					ps.setString(5, (String) comboBox.getSelectedItem());
+					ps.setString(6, textField_3.getText());
+					ps.setString(7, textField_4.getText());
+					ps.setString(8, textField_5.getText());
+					ps.setString(9, textField_1.getText());
+					ps.executeUpdate();
+					dispose();
+					JOptionPane.showMessageDialog(getParent(), "Book Updated");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				LibrarianPage lp = new LibrarianPage();
+				lp.dispose();
+				lp.setVisible(true);
+				setVisible(true);
+				
+			}
+		}
+		});
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int check = JOptionPane.showConfirmDialog(getParent(), "Confirm Delete ?");
+				
+				if(check==0) {
+					String query = "DELETE FROM Books WHERE Id = "+textField_1.getText();
+					try {
+						PreparedStatement ps = con.prepareStatement(query);
+						ps.executeUpdate();
+						dispose();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else {
+					
+				}
+			}
+		});
 		
-		JLabel lblEditBook = new JLabel("Edit Book");
+		JLabel lblEditBook_1 = new JLabel("Edit Book");
 		
 		JLabel label = new JLabel("Id");
 		label.setFocusable(false);
@@ -119,7 +184,7 @@ public class EditBook_1 extends JFrame {
 		textField_1.setColumns(10);
 		
 		
-		String query = "select * from books where Id = "+BookID;
+		String query = "select * from books where Id = "+bookID;
 		
 		String title = "";
 		String author = "";
@@ -145,7 +210,7 @@ public class EditBook_1 extends JFrame {
 				qnt = res.getString(9);
 			}
 			
-			textField_1.setText(BookID);
+			textField_1.setText(bookID);
 			textField_2.setText(title);
 			textField_3.setText(isbn);
 			textField_4.setText(price);
@@ -167,7 +232,7 @@ public class EditBook_1 extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(187, Short.MAX_VALUE)
-					.addComponent(lblEditBook, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblEditBook_1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
 					.addGap(146))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(33, Short.MAX_VALUE)
@@ -222,7 +287,7 @@ public class EditBook_1 extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblEditBook)
+					.addComponent(lblEditBook_1)
 					.addGap(20)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()

@@ -13,26 +13,32 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class EditBook extends JFrame {
+public class SearchBook extends JFrame {
 
 	Connection con = DBInfo.getConn();
-	EditBook_1 editBook_1 = new EditBook_1();
 	private JPanel contentPane;
 	private JTextField textField;
 
 	/**
 	 * Launch the application.
+	 * @throws UnsupportedLookAndFeelException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditBook frame = new EditBook();
+					SearchBook frame = new SearchBook();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,15 +48,15 @@ public class EditBook extends JFrame {
 	}
 
 	
-	public EditBook() {
-		setTitle("Edit Book");
+	public SearchBook() {
+		setTitle("Search Book");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 224);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblEditBook = new JLabel("Edit Book");
+		JLabel lblSearchBook = new JLabel("Search Book");
 		
 		JLabel lblBookId = new JLabel("Book ID");
 		
@@ -67,6 +73,11 @@ public class EditBook extends JFrame {
 				String BookID = textField.getText();
 				String query = "select * from books where id = "+BookID;
 				
+				if(BookID.equals(""))
+				{
+					JOptionPane.showMessageDialog(getParent(), "Empty Field not allowed");
+				}
+				else {
 				try {
 					PreparedStatement ps = con.prepareStatement(query);
 					ResultSet res = ps.executeQuery();
@@ -77,7 +88,7 @@ public class EditBook extends JFrame {
 					
 					if(flag==1) {
 					
-						editBook_1.BookID = BookID;
+						EditBook_1 editBook_1 = new EditBook_1(BookID);
 						editBook_1.setVisible(true);
 						dispose();
 					}
@@ -89,17 +100,13 @@ public class EditBook extends JFrame {
 					e1.printStackTrace();
 				}
 				
-			
+				}
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(181)
-					.addComponent(lblEditBook, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(40, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addContainerGap(51, Short.MAX_VALUE)
 					.addComponent(lblBookId, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -107,12 +114,16 @@ public class EditBook extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnSearch, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
 					.addGap(41))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(170)
+					.addComponent(lblSearchBook, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(174, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblEditBook)
+					.addComponent(lblSearchBook)
 					.addGap(50)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblBookId)

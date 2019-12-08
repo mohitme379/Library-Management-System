@@ -113,7 +113,7 @@ public class Login extends JFrame {
 				}
 				if(i==1 && type.equalsIgnoreCase("student"))
 				{
-					new StudentPage().setVisible(true);
+					new StudentPage(a).setVisible(true);
 					dispose();
 				}
 				if(i==0)

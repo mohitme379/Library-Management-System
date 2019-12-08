@@ -83,6 +83,7 @@ public class EditStudentPassword extends JFrame {
 				
 				String query = "Update student set password = ? where username = ?";
 				String query1 = "select username, password from student";
+				String query2 = "Update login set password = ? where username = ? AND usertype = ?";
 				String getUsername = textField.getText();
 				String getPassword_1 = passwordField_1.getText();
 				String getPassword = passwordField.getText();
@@ -98,6 +99,10 @@ public class EditStudentPassword extends JFrame {
 					PreparedStatement ps1 = con.prepareStatement(query1);
 					ps.setString(1, getPassword_1);
 					ps.setString(2, getUsername);
+					PreparedStatement ps2 = con.prepareStatement(query2);
+					ps2.setString(1, getPassword_1);
+					ps2.setString(2, getUsername);
+					ps2.setString(3, "student");
 					ResultSet res = ps1.executeQuery();
 					while(res.next()) {
 						dbUsername = res.getString(1);
@@ -105,9 +110,11 @@ public class EditStudentPassword extends JFrame {
 					}
 					
 					
-					if(getUsername.equals(dbUsername) && getPassword.equals(dbPassword))
+					if(getUsername.equalsIgnoreCase(dbUsername) && getPassword.equals(dbPassword))
 					{
 						ps.executeUpdate();
+						ps2.executeUpdate();
+				
 					}
 					
 					else

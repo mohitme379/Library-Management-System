@@ -76,8 +76,9 @@ public class EditStudentUserName extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				String query = "update student set username = ? where password = ?";
-				String query2 = "select username, password from student";
+				String query = "update student set Username = ? where Password = ?";
+				String query2 = "select Username, Password from student";
+				String query3 = "update login set Username = ? where Password = ? AND usertype = ?";
 				String newUserName = textField_1.getText();
 				String password = passwordField.getText();
 				String oldUserName = textField.getText();
@@ -106,13 +107,17 @@ public class EditStudentUserName extends JFrame {
 			
 				if(oldUserName.equalsIgnoreCase(dbUserName))
 				{
-					if(dbPassword.equalsIgnoreCase(password))
+					if(dbPassword.equals(password))
 					{
 						try {
 							PreparedStatement ps = con.prepareStatement(query);
 							ps.setString(1, newUserName);
 							ps.setString(2, password);
 							ps.executeUpdate();
+							PreparedStatement ps2 = con.prepareStatement(query2);
+							ps2.setString(1, newUserName);
+							ps2.setString(2, password);
+							ps2.setString(3, "student");
 						} catch (SQLException e1) {
 							
 							e1.printStackTrace();

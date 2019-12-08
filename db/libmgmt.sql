@@ -22,13 +22,9 @@ CREATE TABLE IF NOT EXISTS `author` (
   `Name` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table library.author: 3 rows
+-- Dumping data for table library.author: 0 rows
 DELETE FROM `author`;
 /*!40000 ALTER TABLE `author` DISABLE KEYS */;
-INSERT INTO `author` (`Id`, `Name`) VALUES
-	('01', 'Mohit'),
-	('578', 'HELLO'),
-	('789', 'HI');
 /*!40000 ALTER TABLE `author` ENABLE KEYS */;
 
 -- Dumping structure for table library.books
@@ -56,32 +52,44 @@ CREATE TABLE IF NOT EXISTS `category` (
   `Name` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table library.category: 1 rows
+-- Dumping data for table library.category: 0 rows
 DELETE FROM `category`;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` (`Id`, `Name`) VALUES
-	(1, 'Computer');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
+
+-- Dumping structure for table library.issuedbooks
+CREATE TABLE IF NOT EXISTS `issuedbooks` (
+  `BookID` varchar(50) DEFAULT NULL,
+  `BookName` varchar(50) DEFAULT NULL,
+  `StudentUsername` varchar(50) DEFAULT NULL,
+  `IssuedDate` varchar(50) DEFAULT NULL,
+  `SubmitionDate` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- Dumping data for table library.issuedbooks: 0 rows
+DELETE FROM `issuedbooks`;
+/*!40000 ALTER TABLE `issuedbooks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `issuedbooks` ENABLE KEYS */;
 
 -- Dumping structure for table library.login
 CREATE TABLE IF NOT EXISTS `login` (
   `Id` int(255) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `usertype` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `mobile` varchar(50) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `mobile` varchar(50) DEFAULT NULL,
   `password` varchar(50) NOT NULL,
   KEY `Id` (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table library.login: 3 rows
 DELETE FROM `login`;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
 INSERT INTO `login` (`Id`, `fullname`, `username`, `usertype`, `email`, `mobile`, `password`) VALUES
-	(1, 'Mohit Yadav', 'mohit', 'admin', 'mohit@mohit.com', '9654851265', 'mohit'),
-	(3, 'Sidhart', 'sid', 'student', 'sid@sid.com', '9564125485', 'sid'),
-	(2, 'Hello', 'hello', 'librarian', 'hello@hello.com', '9648512647', 'hello');
+	(1, 'admin', 'admin', 'admin', 'admin@admin.com', '9999999999', 'admin'),
+	(2, 'Hello', 'hello', 'librarian', 'hello@hello.com', '9648512647', 'hello'),
+	(12, 'MOHIT', 'hellomohit ', 'student', NULL, NULL, 'hellomohit');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 
 -- Dumping structure for table library.publication
@@ -90,25 +98,23 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `Name` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table library.publication: 1 rows
+-- Dumping data for table library.publication: 0 rows
 DELETE FROM `publication`;
 /*!40000 ALTER TABLE `publication` DISABLE KEYS */;
-INSERT INTO `publication` (`Id`, `Name`) VALUES
-	('01', 'M&H');
 /*!40000 ALTER TABLE `publication` ENABLE KEYS */;
 
 -- Dumping structure for table library.student
 CREATE TABLE IF NOT EXISTS `student` (
-  `Id` varchar(50) DEFAULT NULL,
   `Name` varchar(50) DEFAULT NULL,
   `Username` varchar(50) DEFAULT NULL,
-  `Password` varchar(50) DEFAULT NULL,
-  `Usertype` varchar(50) DEFAULT NULL
+  `Password` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table library.student: 0 rows
+-- Dumping data for table library.student: 1 rows
 DELETE FROM `student`;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` (`Name`, `Username`, `Password`) VALUES
+	('mohit', 'hellomohit ', 'hellomohit');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 
 -- Dumping structure for table library.subject
@@ -117,11 +123,9 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `Name` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table library.subject: 1 rows
+-- Dumping data for table library.subject: 0 rows
 DELETE FROM `subject`;
 /*!40000 ALTER TABLE `subject` DISABLE KEYS */;
-INSERT INTO `subject` (`Id`, `Name`) VALUES
-	(1, 'Grapes');
 /*!40000 ALTER TABLE `subject` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

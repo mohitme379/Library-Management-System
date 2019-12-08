@@ -29,6 +29,7 @@ public class LibrarianPage extends JFrame {
 	Welcome welcome = new Welcome();
 	EditStudent editStudent = new EditStudent();
 	EditStudentButtons editStudentButtons = new EditStudentButtons();
+	IssuedBook issuedBook = new IssuedBook();
 
 	/**
 	 * Launch the application.
@@ -84,17 +85,49 @@ public class LibrarianPage extends JFrame {
 				allBooks.setVisible(true);
 				editStudent.setVisible(false);
 				editStudentButtons.setVisible(false);
+				issuedBook.setVisible(false);
 			}
 		});
 		
 		JMenuItem mntmIssueBook = new JMenuItem("Issue Book");
+		mntmIssueBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				IssueBook issueBook = new IssueBook();
+				issueBook.setVisible(true);
+			}	
+		});
 		mnFile.add(mntmIssueBook);
 		
 		JMenuItem mntmSubmitBook = new JMenuItem("Submit Book");
+		mntmSubmitBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				SubmitBook submitBook = new SubmitBook();
+				submitBook.setVisible(true);
+			}
+		});
 		mnFile.add(mntmSubmitBook);
 		mnFile.add(mntmAllBooks);
 		
 		JMenuItem mntmIssuedBooks = new JMenuItem("Issued Books");
+		mntmIssuedBooks.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				addStudent.setVisible(false);
+				addBook.setVisible(false);
+				addAuthor.setVisible(false);
+				addPublication.setVisible(false);
+				addCategory.setVisible(false);
+				addSubject.setVisible(false);
+				welcome.setVisible(false);
+				allBooks.setVisible(false);
+				editStudent.setVisible(false);
+				editStudentButtons.setVisible(false);
+				issuedBook.setVisible(true);
+				
+			}
+		});
 		mnFile.add(mntmIssuedBooks);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
@@ -122,6 +155,7 @@ public class LibrarianPage extends JFrame {
 				allBooks.setVisible(false);
 				editStudent.setVisible(false);
 				editStudentButtons.setVisible(false);
+				issuedBook.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmStudent);
@@ -139,6 +173,7 @@ public class LibrarianPage extends JFrame {
 				allBooks.setVisible(false);
 				editStudent.setVisible(false);
 				editStudentButtons.setVisible(false);
+				issuedBook.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmBook);
@@ -156,6 +191,7 @@ public class LibrarianPage extends JFrame {
 				allBooks.setVisible(false);
 				editStudent.setVisible(false);
 				editStudentButtons.setVisible(false);
+				issuedBook.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmAuthor);
@@ -173,6 +209,7 @@ public class LibrarianPage extends JFrame {
 				allBooks.setVisible(false);
 				editStudent.setVisible(false);
 				editStudentButtons.setVisible(false);
+				issuedBook.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmPublication);
@@ -190,6 +227,7 @@ public class LibrarianPage extends JFrame {
 				allBooks.setVisible(false);
 				editStudent.setVisible(false);
 				editStudentButtons.setVisible(false);
+				issuedBook.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmCategory);
@@ -207,6 +245,7 @@ public class LibrarianPage extends JFrame {
 				allBooks.setVisible(false);
 				editStudent.setVisible(false);
 				editStudentButtons.setVisible(false);
+				issuedBook.setVisible(false);
 			}
 		});
 		mnAdd.add(mntmSubject);
@@ -228,6 +267,7 @@ public class LibrarianPage extends JFrame {
 				allBooks.setVisible(false);
 				editStudent.setVisible(true);
 				editStudentButtons.setVisible(true);
+				issuedBook.setVisible(false);
 			}
 		});
 		mnEdit.add(menuItem);
@@ -235,8 +275,8 @@ public class LibrarianPage extends JFrame {
 		JMenuItem menuItem_1 = new JMenuItem("Book");
 		menuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			EditBook editBook = new EditBook();
-			editBook.setVisible(true);
+			SearchBook searchBook = new SearchBook();
+			searchBook.setVisible(true);
 			}
 		});
 		mnEdit.add(menuItem_1);
@@ -327,8 +367,13 @@ public class LibrarianPage extends JFrame {
 		contentPane.add(editStudent);
 		editStudent.setVisible(false);
 		
+		issuedBook.setBounds(0,18,471,443);
+		contentPane.add(issuedBook);
+		issuedBook.setVisible(false);
+		
 		editStudentButtons.setBounds(0,400,471,60);
 		contentPane.add(editStudentButtons);
 		editStudentButtons.setVisible(false);
+		
 	}
 }
